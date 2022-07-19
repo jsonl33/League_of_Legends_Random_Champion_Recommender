@@ -6,7 +6,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import org.jsoup.Jsoup
 import java.util.*
-import kotlin.random.Random.Default.nextInt
 
 lateinit var championPortrait: ImageView
 
@@ -21,11 +20,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         championPortrait = findViewById(R.id.championPortrait)
-
-        }
+    }
 
     private fun rollDice() {
-        val randomInt = Random().nextInt(6) + 1
+        val randomInt = Random().nextInt(6)
         val drawableResource = when (randomInt){
             1 -> R.drawable.garen
             2 -> R.drawable.akali
