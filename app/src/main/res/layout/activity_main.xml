@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listView"
         android:layout_width="409dp"
         android:layout_height="224dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,5 +37,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/garen"
         tools:srcCompat="@drawable/garen" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/championPortrait" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
