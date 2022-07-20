@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.champ_item.*
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import java.util.*
@@ -19,16 +20,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnStart: Button = findViewById(R.id.btnStart)
         val listView: RecyclerView = findViewById(R.id.listView)
-        btnStart.setOnClickListener {
-            listView.layoutManager = LinearLayoutManager(this)
-            doTask("https://www.leagueoflegends.com/ko-kr/champions")
-        }
-
-
         val rollButton: Button = findViewById(R.id.rollButton)
         rollButton.setOnClickListener {
+            listView.layoutManager = LinearLayoutManager(this)
+            doTask("https://www.leagueoflegends.com/ko-kr/champions/")
             rollDice()
         }
     }
@@ -40,19 +36,19 @@ class MainActivity : AppCompatActivity() {
 
         Single.fromCallable{
             try {
-                // 사이트에 접속해서 HTML 문서 가져오기
                 val doc = Jsoup.connect(url).get()
-
-                val elements : Elements = doc.select("div.class")
+                val elements : Elements = doc.select("div[id=\"___gatsby\"]")
                 run elemLoop@{
                     elements.forEachIndexed{ index, elem ->
-                        var portrait =
-                            elem.select("span.data-testid=\"list-0:image\" class=\"style__ImageContainer-n3ovyt-1 ajxce\"").text()
                         var name =
-                            elem.select("span.class=\"style__Name-n3ovyt-2 cMGedC\"").attr("src")
-
+                            elem.select("span[class=\"style__Name-n3ovyt-2 cMGedC\"]").text()
+                        var portrait =
+                            elem.select("span[data-testid=\"list-0:image\" class=\"style__ImageContainer-n3ovyt-1 ajxce\"]").attr("src")
                         var item = ChampItem(name, portrait)
                         itemList.add(item)
+
+                        // 2022년 7월 20일 기준 챔프 수인 159개만 가져오기
+                        if (index == 158) return@elemLoop
                     }
                 }
                 documentTitle = doc.title()
@@ -69,9 +65,6 @@ class MainActivity : AppCompatActivity() {
                 },
                 // documentTitle 응답 오류 시
                 { it.printStackTrace() })
-
-
-
     }
 
     private fun rollDice() {

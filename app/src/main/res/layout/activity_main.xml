@@ -38,12 +38,4 @@
         app:srcCompat="@drawable/garen"
         tools:srcCompat="@drawable/garen" />
 
-    <Button
-        android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Parse"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/championPortrait" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
