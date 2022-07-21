@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lolwebcrawlerdice.item.ChampItem
+import com.example.lolwebcrawlerdice.module.GlideApp
 import kotlinx.android.synthetic.main.champ_item.view.*
 
 class ChampAdapter(var items: ArrayList<ChampItem>) : RecyclerView.Adapter<ChampAdapter.ViewHolder>() {

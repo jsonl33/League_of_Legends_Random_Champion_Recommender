@@ -5,11 +5,11 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lolwebcrawlerdice.item.ChampItem
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.champ_item.*
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import java.util.*
@@ -22,15 +22,16 @@ class MainActivity : AppCompatActivity() {
 
         val listView: RecyclerView = findViewById(R.id.listView)
         val rollButton: Button = findViewById(R.id.rollButton)
+
         rollButton.setOnClickListener {
             listView.layoutManager = LinearLayoutManager(this)
-            doTask("https://www.leagueoflegends.com/ko-kr/champions/")
+            parseImageAndName("https://www.leagueoflegends.com/ko-kr/champions")
             rollDice()
         }
     }
 
 
-    private fun doTask (url : String) {
+    private fun parseImageAndName (url : String) {
         var documentTitle: String = ""
         var itemList: ArrayList<ChampItem> = arrayListOf()
 
