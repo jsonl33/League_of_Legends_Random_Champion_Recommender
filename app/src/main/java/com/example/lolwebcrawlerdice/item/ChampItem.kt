@@ -1,4 +1,4 @@
-package com.example.lolwebcrawlerdice
+package com.example.lolwebcrawlerdice.item
 
 data class ChampItem (
     val name: String,
